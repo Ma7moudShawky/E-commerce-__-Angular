@@ -1,0 +1,23 @@
+<div class="row">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <form [formGroup]="categoryForm" *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+    <label for="categoryName">Category Name</label>
+    <input
+      type="text"
+      id="categoryName"
+      formControlName="categoryName"
+      class="form-control"
+    />
+    <span
+      *ngIf="
+        !categoryForm?.get('categoryName').valid &&
+        categoryForm?.get('categoryName').touched
+      "
+      class="help-block"
+    >
+      Please Enter Name of Category!
+    </span>
+    <br />
+    <button class="btn btn-success" type="submit">Save</button>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-6">
+    <button class="btn btn-primary" [routerLink]="['/Categories', 'New']">
+      New Category
+    </button>
+    <hr />
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    <p *ngIf="categories.length < 1 && !isLoading">No posts available!</p>
+    <ul class="list-group" *ngIf="categories.length >= 1 && !isLoading">
+      <li
+        class="list-group-item"
+        *ngFor="
+          let category of categories
+            | paginate: { itemsPerPage: 5, currentPage: currentPage }
+        "
+      >
+        <a
+          [routerLink]="['/Categories', category.categoryId]"
+          routerLinkActive="activeCategory"
+        >
+          {{ category.categoryName }}
+        </a>
+
+        <button
+          class="btn btn-danger delBtn"
+          (click)="Delete(+category.categoryId)"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-primary updateBtn"
+          [routerLink]="['/Categories', 'Edit', category.categoryId]"
+        >
+          Edit
+        </button>
+      </li>
+    </ul>
+    <pagination-controls
+      (pageChange)="currentPage = $event"
+      (pageBoundsCorrection)="currentPage = $event"
+    ></pagination-controls>
+  </div>
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

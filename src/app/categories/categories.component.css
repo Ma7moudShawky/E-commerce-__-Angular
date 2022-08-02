@@ -1,0 +1,14 @@
+a {
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+.activeCategory {
+  color: gray;
+}
+.delBtn,
+.updateBtn {
+  float: right;
+  margin-left: 2%;
+}
