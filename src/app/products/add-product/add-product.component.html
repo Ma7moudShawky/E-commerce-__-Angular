@@ -80,7 +80,6 @@
           <option [value]="null" disabled selected hidden>
             Select category of product
           </option>
-
           <option
             *ngFor="let category of allCategories"
             [value]="category.categoryId"
@@ -98,6 +97,11 @@
           Please choose category of Product!
         </span>
         <br />
+        <div *ngIf="imgSrc != null">
+          <img [src]="imgSrc" object-fit="cover" height="250" />
+          <br />
+        </div>
+
         <label for="productImage">Product Image</label>
         <input
           type="file"
@@ -117,7 +121,13 @@
           Please choose image of Product!
         </span>
         <br />
-        <button class="btn btn-success" type="submit">Create</button>
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="!productForm.valid"
+        >
+          Create
+        </button>
       </form>
     </div>
   </div>

@@ -2,9 +2,10 @@ import { Category } from './Category';
 
 export class Product {
   productId?: Number;
-  Name: string;
-  Price: Number;
-  Quantity: Number;
-  CategoryId: Number;
-  Category?: Category;
+  name: string;
+  price: Number;
+  quantity: Number;
+  categoryId: Number;
+  category?: Category;
+  imagePath?: string;
 }

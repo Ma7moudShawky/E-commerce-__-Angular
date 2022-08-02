@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/Models/Category';
-import { Product } from 'src/app/Models/Product';
 import { CategoryService } from 'src/app/Services/CategoryService';
 import { ProductService } from 'src/app/Services/ProductService';
 
@@ -16,6 +15,7 @@ export class AddProductComponent implements OnInit {
   productImage: File;
   isLoading: boolean = false;
   allCategories: Category[] = [];
+  imgSrc: string;
 
   constructor(
     private categoryService: CategoryService,
@@ -45,6 +45,11 @@ export class AddProductComponent implements OnInit {
   }
   fileChange(event) {
     this.productImage = event.target.files[0];
+    let reader = new FileReader();
+    reader.onload = (event) => {
+      this.imgSrc = event.target.result.toString();
+    };
+    reader.readAsDataURL(this.productImage);
   }
   onSubmit() {
     if (this.productForm.valid) {
@@ -59,5 +64,8 @@ export class AddProductComponent implements OnInit {
         this.router.navigate(['/Products']);
       });
     }
+  }
+  Cancel() {
+    this.router.navigate(['/Products']);
   }
 }
